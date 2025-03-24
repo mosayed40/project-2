@@ -51,6 +51,16 @@
     overflow: hidden;
 }
 
+.done {
+    background-color: #9395D3;
+    color: #fff;
+}
+
+.done h3 {
+    text-decoration: line-through;
+    color: #fff;
+}
+
 .max {
     padding-right: 15px;
     min-width: 150px;
@@ -102,5 +112,4 @@
 
 #but:hover {
     background-color: #373850cc;
-}     
-
+}
