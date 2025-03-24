@@ -1,7 +1,8 @@
 const title = document.getElementById("title");
 const creat = document.getElementById("but");
 
-
+let mood = "creat";
+let ms;
 // Array
 let dataPro;
 if (localStorage.product != null) {
@@ -12,7 +13,15 @@ if (localStorage.product != null) {
 // creat==
 creat.onclick = function () {
   let newPro = { title: title.value };
-  dataPro.push(newPro);
+  if (mood === "creat") {
+    dataPro.push(newPro);
+  } else {
+    dataPro[ms] = newPro;
+    mood = "creat";
+    creat.innerHTML = "creat";
+    creat.style.background = "#3738508f";
+  }
+
   //   add.file-localstorage===
   localStorage.setItem("product", JSON.stringify(dataPro));
 
@@ -31,9 +40,9 @@ function showData() {
      <div class="main">
      <h3>${dataPro[i].title}</h3>
         <div class="max">
-             <img  src="/assets/photos/Pencil.png" />
-             <img onclick="deleteData( ${i} )" src="/assets/photos/delete.png" />
-             <img  src="/assets/photos/CheckCircle.png" />
+             <img onclick="updateData( ${i} )" src="/project-2/assets/photos/Pencil.png" />
+             <img onclick="deleteData( ${i} )" src="/project-2/assets/photos/delete.png" />
+             <img onclick="doneData( ${i} )" src="/project-2/assets/photos/CheckCircle.png" />
         </div>
     </div>
     `;
@@ -47,4 +56,14 @@ function deleteData(i) {
   localStorage.product = JSON.stringify(dataPro);
   showData();
 }
+function updateData(i) {
+  title.value = dataPro[i].title;
+  creat.innerHTML = "Update";
+  creat.style.background = "green";
+  mood = "update";
+  ms = i;
+}
 
+function doneData(i) {
+  document.querySelector(".main").style.background = "#000";
+}
